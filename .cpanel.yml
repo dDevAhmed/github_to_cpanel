@@ -1,5 +1,5 @@
 ---
   deployment:
     tasks:
-      -export DEPLOYPATH=/home/username/githubtocpaneltesting
+      -export DEPLOYPATH=/home/foodgrub/githubtocpaneltesting
       -/bin/cp -R * $DEPLOYPATH
