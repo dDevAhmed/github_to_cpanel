@@ -1,0 +1,5 @@
+---
+  deployment:
+    tasks:
+      -export DEPLOYPATH=/home/username/githubtocpaneltesting
+      -/bin/cp -R * $DEPLOYPATH
