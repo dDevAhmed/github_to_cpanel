@@ -1,28 +1,28 @@
-name: Deploy Website to cPanel
+name: Deploy Website to cPanel with FTP
 
-# Run workflow on push to the master branch
+# Run workflow on push to master branch
 on:
   push:
     branches:
       - master
 
 jobs:
-  Ftp-Deploy-Action:
-    name: Ftp-Deploy-Action
+  deploy:
     runs-on: ubuntu-latest
-     
+
     steps:
       # Checkout code
-      - uses: actions/checkout@v2.1.0
-        with: 
-          fetch-depth: 2
-          
-      - name: Ftp-Deploy-Action
-        uses: SamKirkland/Ftp-Deploy-Action@3.1.1
-        with: 
-          ftp-server: ${{ secrets.FTP_SERVER }}
-          ftp-username: ${{ secrets.FTP_USERNAME }}
-          ftp-password: ${{ secrets.FTP_PASSWORD }}
-          
+      - name: Checkout Github repository
+        uses: actions/checkout@v3
 
-    
+      # Install an FTP client
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      # Configure FTP connection
+      - name: Set FTP server details
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+
