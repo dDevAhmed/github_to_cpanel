@@ -1,0 +1,28 @@
+name: Deploy Website to cPanel
+
+# Run workflow on push to the master branch
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Ftp-Deploy-Action:
+    name: Ftp-Deploy-Action
+    runs-on: ubuntu-latest
+     
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v2.1.0
+        with: 
+          fetch-depth: 2
+          
+      - name: Ftp-Deploy-Action
+        uses: SamKirkland/Ftp-Deploy-Action@3.1.1
+        with: 
+          ftp-server: ${{ secrets.FTP_SERVER }}
+          ftp-username: ${{ secrets.FTP_USERNAME }}
+          ftp-password: ${{ secrets.FTP_PASSWORD }}
+          
+
+    
